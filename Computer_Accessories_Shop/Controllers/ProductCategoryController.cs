@@ -1,4 +1,5 @@
-﻿using Computer_Accessories_Shop.Data.Model;
+﻿using Computer_Accessories_Shop.Api.ViewModel.Products;
+using Computer_Accessories_Shop.Data.Model;
 using Computer_Accessories_Shop.Service.Service;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
@@ -29,14 +30,35 @@ namespace Computer_Accessories_Shop.Api.Controllers
             return findedReslut;
         }
         [HttpPost("Create")]
-        public bool Create(ProductCategory model)
+        public bool Create(ProductCategoryViewModel model)
         {
-            return productCategoryService.Create(model);
+            if (model.ParentID == 0)
+                model.ParentID = null;
+
+            var newModel=new ProductCategory()
+            {
+                Title = model.Title,
+                Image=model.Image,
+                ParentID=model.ParentID,
+            };
+
+            return productCategoryService.Create(newModel);
         }
         [HttpPost("Edit")]
-        public bool Edit(ProductCategory model)
+        public bool Edit(ProductCategoryViewModel model)
         {
-            return productCategoryService.Edit(model);
+            if (model.ParentID == 0)
+                model.ParentID = null;
+
+            var newModel = new ProductCategory()
+            {
+                ID = model.ID,
+                Title = model.Title,
+                Image = model.Image,
+                ParentID = model.ParentID,
+            };
+
+            return productCategoryService.Edit(newModel);
         }
         [HttpPost("Delete")]
         public bool Delete(int id)

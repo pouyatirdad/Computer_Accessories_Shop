@@ -20,4 +20,9 @@
     <ProjectReference Include="..\Computer_Accessories_Shop.Service\Computer_Accessories_Shop.Service.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="UploadedFiles\Images\" />
+    <Folder Include="UploadedFiles\Temp\" />
+  </ItemGroup>
+
 </Project>

@@ -2,8 +2,11 @@
 using Computer_Accessories_Shop.Data.Model;
 using Computer_Accessories_Shop.Service.Service;
 using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using StorePanel.Infrastructure.Helpers;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Computer_Accessories_Shop.Api.Controllers
 {
@@ -30,10 +33,16 @@ namespace Computer_Accessories_Shop.Api.Controllers
             return findedReslut;
         }
         [HttpPost("Create")]
-        public bool Create(ProductCategoryViewModel model)
+        public async Task<bool> Create([FromForm] ProductCategoryViewModel model)
         {
             if (model.ParentID == 0)
                 model.ParentID = null;
+
+            if (model.File != null)
+            {
+                var imageName = await ImageHelper.SaveImage(model.File, 670, 400, true);
+                model.Image = imageName;
+            }
 
             var newModel=new ProductCategory()
             {
@@ -45,10 +54,16 @@ namespace Computer_Accessories_Shop.Api.Controllers
             return productCategoryService.Create(newModel);
         }
         [HttpPost("Edit")]
-        public bool Edit(ProductCategoryViewModel model)
+        public async Task<bool> Edit([FromForm] ProductCategoryViewModel model)
         {
             if (model.ParentID == 0)
                 model.ParentID = null;
+
+            if (model.File != null)
+            {
+                var imageName = await ImageHelper.SaveImage(model.File, 670, 400, true);
+                model.Image = imageName;
+            }
 
             var newModel = new ProductCategory()
             {

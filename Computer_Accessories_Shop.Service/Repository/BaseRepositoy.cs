@@ -32,7 +32,7 @@ namespace Computer_Accessories_Shop.Service.Repository
                 Save();
                 return true;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 return false;
             }

@@ -46,7 +46,7 @@ namespace Computer_Accessories_Shop.Api.Controllers
         }
 
         [HttpPost("register")]
-        public async Task<IActionResult> Register(RegisterViewModel model, bool IsAdmin = false)
+        public async Task<IActionResult> Register(RegisterViewModel model)
         {
 
             if (ModelState.IsValid)
@@ -66,7 +66,7 @@ namespace Computer_Accessories_Shop.Api.Controllers
 
                 if (result.Succeeded)
                 {
-                    string roleName = IsAdmin ? "Admin" : "User";
+                    string roleName = model.IsAdmin ? "Admin" : "User";
 
                     var result2 = new IdentityResult();
 

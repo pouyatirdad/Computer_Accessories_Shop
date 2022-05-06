@@ -12,5 +12,6 @@ namespace Computer_Accessories_Shop.Api.ViewModel.Account
         public string Password { get; set; }
         [Required, Display(Name = "تکرار رمز عبور"), Compare(nameof(Password)), DataType(DataType.Password)]
         public string RetypePassword { get; set; }
+        public bool IsAdmin { get; set; } = false;
     }
 }
